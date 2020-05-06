@@ -1,188 +1,129 @@
-$red: #F37272;
-$brown: #584E4A;
-$whitey: #f0f0f0;
-
-$snap: cubic-bezier(1.000, 0.005, 0.240, 1.000);
-$bounce: cubic-bezier(0.175, 0.885, 0.320, 1.275);
-
-* {
-  box-sizing: border-box;
+#nav,#nav ul {
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
 }
-html,
-body {
-  height: 100%;
-  overflow: hidden;
+#nav {
+    background: url('menu_bg.png') no-repeat scroll 0 0 transparent;
+    clear: both;
+    font-size: 12px;
+    height: 58px;
+    padding: 0 0 0 9px;
+    position: relative;
+    width: 957px;
 }
-.page {
-  height: 100%;
-  background-color: $brown;
-}
-.content {
-  // essential
-  height: 200%; // make higher or you'll see background when rotated
-  transform-origin: top left;
-  transition: transform .7s $snap;
-  
-  // styling
-  background-color: $whitey;
-}
-.content_inner {
-  // essential
-  height: 50%; // compensate for higher .content
-  overflow-y: auto; // set expected overflow
-  
-  // styling
-  padding: 50px 20%;
-}
-
-/* basically all styling from now on */
-.menu_toggle {
-  z-index: 900;
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: block;
-  cursor: pointer;
-  width: 100px;
-  height: 80px;
-  background-color: $red;
-  border-bottom-right-radius: 100%;
-  
-  &:active {
-    i {
-      opacity: 0.8
-    }
-  }  
-  i {
-    color: $whitey;
-  }
-  .menu_open,
-  .menu_close {
+#nav ul {
+    background-color: #222;
+    border:1px solid #222;
+    border-radius: 0 5px 5px 5px;
+    border-width: 0 1px 1px;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    left: -9999px;
+    overflow: hidden;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -15px;
-    margin-left: -12px;
-    transition: transform .7s $snap;
-  }
-  .menu_open {
-    transform-origin: -100px -100px;
-  }
-  .menu_close {
-    transform: rotate(20deg);
-    transform-origin: -100px -160px;
-  }
+    top: -9999px;
+    z-index: 2;
+    -moz-transform: scaleY(0);
+    -ms-transform: scaleY(0);
+    -o-transform: scaleY(0);
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    -moz-transform-origin: 0 0;
+    -ms-transform-origin: 0 0;
+    -o-transform-origin: 0 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    -moz-transition: -moz-transform 0.1s linear;
+    -ms-transition: -ms-transform 0.1s linear;
+    -o-transition: -o-transform 0.1s linear;
+    -webkit-transition: -webkit-transform 0.1s linear;
+    transition: transform 0.1s linear;
 }
-.menu_items {
-  position: fixed;
-  bottom: 0;
-  left: 50px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  
-  li {
-    height: 60px;
-    margin-bottom: 30px;
-    transform: translateX(-300px);
-    transition: transform .7s 0s $snap;
-    
-    &:nth-child(2){
-      margin-left: 40px;
-    }
-    &:nth-child(3){
-      margin-left: 80px;
-    }
-  }
-  a {
+#nav li {
+    background: url('menu_line.png') no-repeat scroll right 5px transparent;
+    float: left;
+    position: relative;
+}
+#nav li a {
+    color: #FFFFFF;
     display: block;
+    float: left;
+    font-weight: normal;
+    height: 30px;
+    padding: 23px 20px 0;
+    position: relative;
     text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: darken($whitey, 30%);
-    transition: color .2s;
-    
-    .icon {
-      position: relative;
-      display: inline-block;
-      margin-right: 25px;
-      color: $whitey;
-
-      &:after {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        content: '';
-        display: block;
-        width: 60px;
-        height: 60px;
-        margin-left: -33px;
-        margin-top: -32px;
-        border-radius: 100%;
-        border: 2px solid $whitey;
-        transition: border-color .2s;
-      }
-    }
-    
-    &:hover {
-      color: $whitey;
-      .icon {
-        &:after {
-          border-color: $red;
-        }
-      }
-    }
-    &:active {
-      .icon {
-        color: $red;
-      }
-    }
-  }
+    text-shadow: 1px 1px 1px #000000;
 }
-
-
-/* Let's open up the menu */
-.shazam {
-  .content {
-    transform: rotate(-30deg);
-  }
-  
-  // this will show hidden content overflow when rotated,
-  // but will result in a jump, if you've already scrolled down the content
-  // plus, you will lose your current reading position
-  // fixable with JS, not gonna bother
-  
-  /*.content_inner {
-    height: 100%;
-  }*/
-  
-  .menu_open {
-    transform: rotate(-20deg);
-  }
-  .menu_close {
-    transform: rotate(0);
-  }
-  
-  .menu_items {
-    li {
-      transform: translateX(0);
-      transition: transform .35s .45s $bounce;
-    
-      &:nth-child(2){
-        transition-delay: .47s;
-      }
-      &:nth-child(3){
-        transition-delay: .48s;
-      }
-    }
-  }
+#nav li:hover > a {
+    color: #00B4FF;
 }
-
-// misc
-h1 {
-  padding-bottom: 15px;
-  border-bottom: 1px solid #ddd;
+#nav li:hover, #nav a:focus, #nav a:hover, #nav a:active {
+    background: none repeat scroll 0 0 #121212;
+    outline: 0 none;
 }
-body {
-  color: $brown;
+#nav li:hover ul.subs {
+    left: 0;
+    top: 53px;
+    width: 180px;
+    -moz-transform: scaleY(1);
+    -ms-transform: scaleY(1);
+    -o-transform: scaleY(1);
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+}
+#nav ul li {
+    background: none;
+    width: 100%;
+}
+#nav ul li a {
+    float: none;
+}
+#nav ul li:hover > a {
+    background-color: #121212;
+    color: #00B4FF;
+}
+#lavalamp {
+    background: url('lavalamp.png') no-repeat scroll 0 0 transparent;
+    height: 16px;
+    left: 13px;
+    position: absolute;
+    top: 0px;
+    width: 64px;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    -o-transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    transition: all 300ms ease;
+}
+#lavalamp:hover {
+    -moz-transition-duration: 3000s;
+    -ms-transition-duration: 3000s;
+    -o-transition-duration: 3000s;
+    -webkit-transition-duration: 3000s;
+    transition-duration: 3000s;
+}
+#nav li:nth-of-type(1):hover ~ #lavalamp {
+    left: 13px;
+}
+#nav li:nth-of-type(2):hover ~ #lavalamp {
+    left: 90px;
+}
+#nav li:nth-of-type(3):hover ~ #lavalamp {
+    left: 170px;
+}
+#nav li:nth-of-type(4):hover ~ #lavalamp {
+    left: 250px;
+}
+#nav li:nth-of-type(5):hover ~ #lavalamp {
+    left: 330px;
+}
+#nav li:nth-of-type(6):hover ~ #lavalamp {
+    left: 410px;
+}
+#nav li:nth-of-type(7):hover ~ #lavalamp {
+    left: 490px;
+}
+#nav li:nth-of-type(8):hover ~ #lavalamp {
+    left: 565px;
 }
